@@ -1,0 +1,13 @@
+.cell{
+    -fx-background-color: lightblue;
+    -fx-border-color: black;
+    -fx-border-radius: 0px;
+}
+
+.cell:hover{
+    -fx-background-color: lightcyan;
+}
+
+.mined, .mined:hover{
+    -fx-background-color: whitesmoke;
+}
