@@ -26,12 +26,12 @@
                   <Button fx:id="startBtn" mnemonicParsing="false" text="Start" textAlignment="CENTER" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Score">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </Text>
-                        <Text fx:id="score" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <Text fx:id="time" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
                      <HBox.margin>
                         <Insets left="50.0" />

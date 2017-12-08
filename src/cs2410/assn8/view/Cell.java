@@ -11,32 +11,58 @@ import javafx.scene.input.MouseEvent;
 
 public class Cell extends Button{
     private boolean isBomb;
+    public boolean isMined = false;
     public int neighbors;
     public int row;
     public int col;
-    private boolean isFlagged = false;
+    public boolean isFlagged = false;
+    public char marker = 'n'; // n none, f flag, q question mark
 
-    private static Image flagImgFile= new Image("flag.png");
+    private static Image flagImgFile = new Image("flag.png");
+    private static Image quesImgFile = new Image("questionMark.png");
+    private static Image mineImgFile = new Image("mine.png");
 
     private ImageView flagImg = new ImageView(flagImgFile);
+    private ImageView quesImg = new ImageView(quesImgFile);
+    private ImageView mineImg = new ImageView(mineImgFile);
 
-    public boolean toggleFlag(){
-        if(isFlagged) setGraphic(null);
-        else setGraphic(flagImg);
-        isFlagged = !isFlagged;
-        return isFlagged;
+    public void setMarker(char c){
+        char temp = marker;
+        marker = c;
+        if(c == 'n') {setGraphic(null); isFlagged = false;}
+        else if (c == 'f') {setGraphic(flagImg); isFlagged = true;}
+        else if (c == 'q') {setGraphic(quesImg); isFlagged = true;}
+        else if (c == 'm') setGraphic(mineImg);
+        else marker = temp;
     }
 
     public Cell(boolean bomb){
         isBomb = bomb;
         neighbors = -1;
         setOnMouseClicked(Controller::clickHandler);
+        getStyleClass().add("cell");
+        getStyleClass().add("live-cell");
         flagImg.setFitHeight(15);
         flagImg.setFitWidth(10);
+        quesImg.setFitHeight(15);
+        quesImg.setFitWidth(15);
+        mineImg.setFitHeight(15);
+        mineImg.setFitWidth(15);
     }
 
     public boolean isBomb(){
         return isBomb;
+    }
+
+    public void explode(){
+        if(isBomb){
+            setGraphic(mineImg);
+            getStyleClass().add("exploded");
+        }
+        else{
+            setMarker('n');
+        }
+        getStyleClass().remove("live-cell");
     }
 
 //    EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
@@ -46,12 +72,4 @@ public class Cell extends Button{
 //            getStyleClass().add("mined");
 //        }
 //    };
-    EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            MouseButton mouseBtn = event.getButton();
-            if(mouseBtn == MouseButton.PRIMARY) col=0;
-            else if(mouseBtn == MouseButton.SECONDARY) toggleFlag();
-        }
-    };
 }

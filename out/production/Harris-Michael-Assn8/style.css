@@ -2,12 +2,17 @@
     -fx-background-color: lightblue;
     -fx-border-color: black;
     -fx-border-radius: 0px;
+    -fx-padding: 0px;
 }
 
-.cell:hover{
+.live-cell:hover{
     -fx-background-color: lightcyan;
 }
 
 .mined, .mined:hover{
     -fx-background-color: whitesmoke;
+}
+
+.exploded{
+    -fx-background-color: red;
 }
